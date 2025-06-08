@@ -12,7 +12,15 @@ class ShowPasswords extends Component
     public $search = '';
     public function render()
     {
-        $passwords = Password::where('user_id', auth()->user()->id)->where('place', 'like', "%{$this->search}%")->orWhere('category', 'like', "%{$this->search}%")->orderBy('id', 'desc')->paginate(5);
+        $passwords = Password::where('user_id', auth()->user()->id)
+            ->when($this->search, function ($query) {
+                $query->where(function ($q) {
+                    $q->where('place', 'like', "%{$this->search}%")
+                        ->orWhere('category', 'like', "%{$this->search}%");
+                });
+            })
+            ->orderBy('id', 'desc')
+            ->paginate(5);
         return view('livewire.show-passwords', compact('passwords'));
     }
 
