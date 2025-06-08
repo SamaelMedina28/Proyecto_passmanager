@@ -16,7 +16,6 @@ class PasswordFormEdit extends Component
     public $password;
     #[Validate('required|min:5|max:255')]
     public $category;
-    #[Validate('required|min:5|max:255')]
     public $url;
     public function mount($password)
     {
@@ -32,7 +31,7 @@ class PasswordFormEdit extends Component
         $this->validateOnly($propertyName);
     }
 
-    public function update()
+    public function update() 
     {
         $this->validate();
         $this->password_info->update([
