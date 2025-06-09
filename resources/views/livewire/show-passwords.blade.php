@@ -1,9 +1,26 @@
-<div>
+<div class="flex w-full lg:w-3/4 xl:w-1/2 mx-auto flex-col gap-4 rounded-xl">
+    {{-- ? Botones --}}
+    <div class="flex gap-2">
+        <a href="{{ route('passwords.create') }}" wire:navigate
+            class="flex items-center bg-black hover:bg-zinc-900 active:bg-zinc-800 text-white px-6 text-center text-sm justify-center rounded-lg cursor-pointer h-10">
+            Agregar
+        </a>
+        @if (auth()->user()->passwords()->count() > 0)
+            <a href="{{ route('passwords.export') }}"
+                class="flex items-center bg-zinc-50 border border-zinc-200 dark:bg-zinc-700 dark:border-zinc-600 hover:bg-zinc-100 dark:hover:bg-zinc-600  dark:text-white text-black px-6 text-center text-sm justify-center rounded-lg cursor-pointer h-10">
+                Exportar
+            </a>
+        @endif
+    </div>
+    {{-- ? Tabla principal --}}
     <div class="relative h-full flex-1 overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
+        {{-- ? Buscador --}}
         <div>
-            <input type="text" wire:model.live="search" placeholder="Buscar" class="w-full p-2 border border-neutral-200 dark:border-neutral-700 focus:outline-none focus:border-neutral-400 dark:focus:border-neutral-600 rounded-lg"/>
+            <input type="text" wire:model.live="search" placeholder="Buscar"
+                class="w-full p-2 border border-neutral-200 dark:border-neutral-700 focus:outline-none focus:border-neutral-400 dark:focus:border-neutral-600 rounded-lg" />
         </div>
-        <div class="flex flex-col w-full py-10 justify-center">
+        {{-- ? Tabla vacia --}}
+        <div class="flex flex-col w-full {{ $passwords->isEmpty() ? 'py-10' : 'pt-10' }} justify-center">
             @if ($passwords->isEmpty())
                 <div class="flex flex-col items-center justify-center h-full">
                     <p class="text-2xl font-bold text-neutral-800 dark:text-white">No hay contraseñas</p>
@@ -14,9 +31,10 @@
                     </a>
                 </div>
             @else
+                {{-- ? Tabla llena --}}
                 @foreach ($passwords as $password)
                     <div
-                        class="bg-white dark:bg-neutral-800 rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg dark:shadow-neutral-900/50 mb-5">
+                        class="bg-white dark:bg-neutral-800 rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg dark:shadow-neutral-900/50">
                         <div class="p-5 border-b border-neutral-200 dark:border-neutral-700">
                             <div class="flex items-center justify-between mb-3">
                                 <h3 class="text-lg font-semibold text-neutral-800 dark:text-white">
