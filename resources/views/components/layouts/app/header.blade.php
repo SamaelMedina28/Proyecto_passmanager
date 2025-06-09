@@ -19,11 +19,10 @@
 
             <flux:spacer />
 
-            <flux:navbar class="me-1.5 space-x-0.5 rtl:space-x-reverse py-0!">
-                <flux:tooltip :content="__('Search')" position="bottom">
-                    <flux:navbar.item class="!h-10 [&>div>svg]:size-5" icon="magnifying-glass" href="#" :label="__('Search')" />
-                </flux:tooltip>
-            </flux:navbar>
+            <flux:radio.group class="hidden sm:flex mx-4" x-data variant="segmented" x-model="$flux.appearance">
+                <flux:radio value="light" icon="sun"></flux:radio>
+                <flux:radio value="dark" icon="moon"></flux:radio>
+            </flux:radio.group>
 
             <!-- Desktop User Menu -->
             <flux:dropdown position="top" align="end">
