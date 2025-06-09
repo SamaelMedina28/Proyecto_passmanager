@@ -96,6 +96,7 @@
                                         </svg>
                                     </a>
                                     <button wire:click="destroy({{ $password->id }})"
+                                        wire:confirm="¿Seguro que quieres borrar esta contraseña?"
                                         class="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300">
                                         <svg class="w-6 h-6 sm:w-5 sm:h-5" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
