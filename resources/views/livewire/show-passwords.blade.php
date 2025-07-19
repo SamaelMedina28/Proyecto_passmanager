@@ -12,13 +12,13 @@
             </a>
         @endif
     </div>
+    {{-- ? Buscador --}}
+    <div>
+        <input type="text" wire:model.live="search" placeholder="Buscar"
+            class="w-full p-2 border border-neutral-200 dark:border-neutral-700 focus:outline-none focus:border-neutral-400 dark:focus:border-neutral-600 rounded" />
+    </div>
     {{-- ? Tabla principal --}}
-    <div class="relative h-full flex-1 overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
-        {{-- ? Buscador --}}
-        <div>
-            <input type="text" wire:model.live="search" placeholder="Buscar"
-                class="w-full p-2 border border-neutral-200 dark:border-neutral-700 focus:outline-none focus:border-neutral-400 dark:focus:border-neutral-600 rounded-lg" />
-        </div>
+    <div class="relative h-full flex-1 overflow-hidden rounded border border-neutral-200 dark:border-neutral-700">
         {{-- ? Tabla vacia --}}
         <div class="flex flex-col w-full {{ $passwords->isEmpty() ? 'py-10' : 'pt-10' }} justify-center">
             @if ($passwords->isEmpty())
@@ -110,9 +110,9 @@
                     </div>
                 @endforeach
             @endif
-            <div class="mx-auto w-1/2">
-                {{ $passwords->links() }}
-            </div>
         </div>
+    </div>
+    <div class="flex justify-end">
+        {{ $passwords->links() }}
     </div>
 </div>
